@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
 import "./Register.css";
+import { Navigate } from "react-router-dom";
 
 const Register = () => {
   const navigate = useNavigate();
@@ -16,7 +17,6 @@ const Register = () => {
   const [error, setError] = useState("");
   const [passwordStrength, setPasswordStrength] = useState("");
 
-  // Handle input changes
   const handleChange = (e) => {
     const { name, value } = e.target;
     setFormData((prev) => ({
@@ -24,13 +24,11 @@ const Register = () => {
       [name]: value,
     }));
 
-    // Check password strength
     if (name === "password") {
       checkPasswordStrength(value);
     }
   };
 
-  // Check password strength
   const checkPasswordStrength = (password) => {
     let strength = "";
     if (password.length === 0) {
@@ -45,13 +43,11 @@ const Register = () => {
     setPasswordStrength(strength);
   };
 
-  // Handle form submission
   const handleSubmit = async (e) => {
     e.preventDefault();
     setError("");
     setLoading(true);
 
-    // Validation
     if (formData.password !== formData.confirmPassword) {
       setError("Passwords do not match");
       setLoading(false);
@@ -76,11 +72,9 @@ const Register = () => {
       );
 
       if (response.data.success) {
-        // Save token to localStorage
         localStorage.setItem("token", response.data.token);
         localStorage.setItem("user", JSON.stringify(response.data.user));
 
-        // Redirect based on role
         if (response.data.user.role === "instructor") {
           navigate("/instructor-dashboard");
         } else {
