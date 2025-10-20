@@ -4,7 +4,7 @@ const EnrollmentSchema = new mongoose.Schema({
   _id: ObjectId,
   student: { type: ObjectId, ref: 'User' },
   course: { type: ObjectId, ref: 'Course' },
-  progress: Number, // 0-100%
+  progress: Number, 
   completed: Boolean,
   enrolledAt: Date
 }
