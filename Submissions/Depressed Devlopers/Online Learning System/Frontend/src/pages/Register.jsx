@@ -78,7 +78,7 @@ const Register = () => {
         if (response.data.user.role === "instructor") {
           navigate("/instructor-dashboard");
         } else {
-          navigate("/courses");
+          navigate("/Login");
         }
       }
     } catch (error) {
